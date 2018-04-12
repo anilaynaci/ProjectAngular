@@ -28,7 +28,7 @@ import {AuthGuardService} from './services/auth-guard.service';
       {path: 'login', component: LoginComponent},
       {path: 'register', component: RegisterComponent},
       {path: 'home', component: HomeComponent, canActivate: [AuthGuardService]},
-      {path: '', redirectTo: 'login', pathMatch: 'full'}
+      {path: '', redirectTo: 'home', pathMatch: 'full'}
     ]),
   ],
   providers: [AuthService, AuthGuardService],

@@ -13,12 +13,16 @@ export class HomeComponent {
   getUser: string[];
 
   constructor(public router: Router) {
-    this.getUser = localStorage.getItem('getUser').split('~');
-    this.title += this.getUser[1];
+    if (localStorage.getItem('getUser') !== undefined) {
+      if (localStorage.getItem('getUser') !== '' && localStorage.getItem('getUser').includes('~')) {
+        this.getUser = localStorage.getItem('getUser').split('~');
+        this.title += this.getUser[1];
+      }
+    }
   }
 
   logout() {
-    localStorage.removeItem('getUser');
+    localStorage.setItem('getUser', '');
     this.router.navigate(['login']);
   }
 }

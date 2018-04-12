@@ -25,7 +25,7 @@ export class LoginComponent {
         }
       },
       (res: Response) => {
-        alert('Daha sonra tekrar deneyinizç');
+        alert('Daha sonra tekrar deneyiniz.');
       }
     );
   }
