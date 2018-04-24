@@ -8,7 +8,10 @@ import {Router} from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+
   user: any = {};
+
+  loginValue: string[];
 
   constructor(private auth: AuthService, public router: Router) {
 
@@ -17,15 +20,18 @@ export class LoginComponent {
   login() {
     this.auth.login(this.user).subscribe(
       (res: Response) => {
-        if (res.toString() !== '') {
-          localStorage.setItem('getUser', res.toString());
+        if (res.toString().includes('~')) {
+          this.loginValue = res.toString().split('~');
+          /*alert('token: ' + this.loginValue[0] + ' userID: ' + this.loginValue[1] );*/
+          localStorage.setItem('token', this.loginValue[0]);
+          localStorage.setItem('userID', this.loginValue[1]);
           this.router.navigate(['home']);
         } else {
-          alert('Kullanıcı adı veya şifre hatalı.');
+          alert(res);
         }
       },
       (res: Response) => {
-        alert('Daha sonra tekrar deneyiniz.');
+        alert(res);
       }
     );
   }

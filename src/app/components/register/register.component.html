@@ -6,15 +6,15 @@
     <form novalidate>
       <div class="form-group">
         <label for="Name">Name</label>
-        <input type="text" class="form-control" id="Name" placeholder="Enter Name" [(ngModel)]="user.Name" name="Name" required>
+        <input type="text" class="form-control" id="Name" placeholder="Enter Name" [(ngModel)]="user.name" name="Name" required>
       </div>
       <div class="form-group">
         <label for="Password">Password</label>
-        <input type="password" class="form-control" id="Password" placeholder="Enter password" [(ngModel)]="user.Password" name="Password" required>
+        <input type="password" class="form-control" id="Password" placeholder="Enter password" [(ngModel)]="user.password" name="Password" required>
       </div>
       <div class="form-group">
         <label for="ConfirmPassword">Confirm Password</label>
-        <input type="password" class="form-control" id="ConfirmPassword" placeholder="Re-Enter password" [(ngModel)]="user.ConfirmPassword" name="ConfirmPassword" required>
+        <input type="password" class="form-control" id="ConfirmPassword" placeholder="Re-Enter password" [(ngModel)]="user.confirmPassword" name="ConfirmPassword" required>
       </div>
       <a class="btn btn-default" routerLink="/login">Login</a>
       <button type="submit" class="btn btn-primary" (click)="register()">Register</button>

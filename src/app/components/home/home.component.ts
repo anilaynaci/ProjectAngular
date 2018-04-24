@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -10,19 +11,26 @@ import {Router} from '@angular/router';
 export class HomeComponent {
   title = 'Welcome ';
 
-  getUser: string[];
+  token: any = {};
 
-  constructor(public router: Router) {
-    if (localStorage.getItem('getUser') !== undefined) {
-      if (localStorage.getItem('getUser') !== '' && localStorage.getItem('getUser').includes('~')) {
-        this.getUser = localStorage.getItem('getUser').split('~');
-        this.title += this.getUser[1];
-      }
-    }
+  constructor(private auth: AuthService, public router: Router) {
   }
 
   logout() {
-    localStorage.setItem('getUser', '');
-    this.router.navigate(['login']);
+    this.token.userID = localStorage.getItem('userID');
+    this.token.token = localStorage.getItem('token');
+
+    this.auth.tokenDelete(this.token).subscribe(
+      (res: Response) => {
+          if (res.toString() === 'OK') {
+            localStorage.setItem('userID', '');
+            localStorage.setItem('token', '');
+            this.router.navigate(['login']);
+          }
+      },
+      (res: Response) => {
+        alert(res);
+      }
+    );
   }
 }
